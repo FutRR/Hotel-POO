@@ -113,5 +113,15 @@ class Hotel
         $this->reservations[] = $reservation;
     }
 
+    // DISPLAY //
+
+    public function getInfos()
+    {
+        return "<h3>$this->nom " . $this->etoiles . " $this->ville</h3>
+                    <p>$this->adresse " . $this->codePostal . " $this->ville</p>
+                    <p>Nombre de Chambres : $this->nbChambres</p>
+                    <p>Nombre de chambres reservées : </p>
+                    <p>Nombre de chambres dispo : </p>";
+    }
 
 }
