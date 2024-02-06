@@ -7,6 +7,8 @@ class Chambre
     private int $nbLits;
     private bool $wifi;
     private bool $etat;
+    private array $reservations;
+
 
     public function __construct(string $numero, int $prix, int $nbLits, bool $wifi, bool $etat)
     {
@@ -15,21 +17,14 @@ class Chambre
         $this->nbLits = $nbLits;
         $this->wifi = $wifi;
         $this->etat = $etat;
+        $this->resrvations = [];
     }
 
-    /**
-     * Get the value of numero
-     */
     public function getNumero(): string
     {
         return $this->numero;
     }
 
-    /**
-     * Set the value of numero
-     *
-     * @return  self
-     */
     public function setNumero(string $numero)
     {
         $this->numero = $numero;
@@ -37,19 +32,11 @@ class Chambre
         return $this;
     }
 
-    /**
-     * Get the value of prix
-     */
     public function getPrix(): int
     {
         return $this->prix;
     }
 
-    /**
-     * Set the value of prix
-     *
-     * @return  self
-     */
     public function setPrix(int $prix)
     {
         $this->prix = $prix;
@@ -92,4 +79,22 @@ class Chambre
 
         return $this;
     }
+
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
+
+        return $this;
+    }
+
+    public function addReservations(Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+    }
+
 }

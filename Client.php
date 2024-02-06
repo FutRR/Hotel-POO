@@ -4,11 +4,13 @@ class Client
 {
     private string $nom;
     private string $prenom;
+    private array $reservations;
 
     public function __construct(string $nom, string $prenom)
     {
         $this->nom = $nom;
         $this->prenom = $prenom;
+        $this->resrvations = [];
     }
 
     public function getNom(): string
@@ -34,4 +36,22 @@ class Client
 
         return $this;
     }
+
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
+
+        return $this;
+    }
+
+    public function addReservations(Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+    }
+
 }

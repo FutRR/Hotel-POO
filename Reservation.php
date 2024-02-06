@@ -1,6 +1,6 @@
 <?php
 
-class Reserver
+class Reservation
 {
     private Hotel $hotel;
     private Chambre $chambre;
@@ -9,8 +9,11 @@ class Reserver
     public function __construct(Hotel $hotel, Chambre $chambre, Client $client)
     {
         $this->hotel = $hotel;
+        $this->hotel->addReservations($this);
         $this->chambre = $chambre;
+        $this->chambre->addReservations($this);
         $this->client = $client;
+        $this->client->addReservations($this);
     }
 
     public function getHotel(): Hotel

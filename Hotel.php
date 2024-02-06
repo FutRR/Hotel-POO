@@ -8,6 +8,7 @@ class Hotel
     private string $ville;
     private string $codePostal;
     private int $nbChambres;
+    private array $reservations;
 
     public function __construct(string $nom, string $etoiles, string $adresse, string $ville, string $codePostal, int $nbChambres)
     {
@@ -17,6 +18,7 @@ class Hotel
         $this->ville = $ville;
         $this->codePostal = $codePostal;
         $this->nbChambres = $nbChambres;
+        $this->resrvations = [];
     }
 
     // GETTERS & SETTERS //
@@ -93,4 +95,23 @@ class Hotel
 
         return $this;
     }
+
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    public function setReservations($reservations)
+    {
+        $this->reservations = $reservations;
+
+        return $this;
+    }
+
+    public function addReservations(Reservation $reservation)
+    {
+        $this->reservations[] = $reservation;
+    }
+
+
 }
