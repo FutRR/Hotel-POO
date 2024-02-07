@@ -7,18 +7,18 @@ class Hotel
     private string $adresse;
     private string $ville;
     private string $codePostal;
-    private int $nbChambres;
+    private array $chambres;
     private array $reservations;
 
-    public function __construct(string $nom, string $etoiles, string $adresse, string $ville, string $codePostal, int $nbChambres)
+    public function __construct(string $nom, string $etoiles, string $adresse, string $ville, string $codePostal)
     {
         $this->nom = $nom;
         $this->etoiles = $etoiles;
         $this->adresse = $adresse;
         $this->ville = $ville;
         $this->codePostal = $codePostal;
-        $this->nbChambres = $nbChambres;
-        $this->resrvations = [];
+        $this->chambres = [];
+        $this->reservations = [];
     }
 
     // GETTERS & SETTERS //
@@ -83,17 +83,21 @@ class Hotel
 
         return $this;
     }
-
-    public function getNbChambres(): int
+    public function getChambres()
     {
-        return $this->nbChambres;
+        return $this->chambres;
     }
 
-    public function setNbChambres(int $nbChambres)
+    public function setChambres($chambres)
     {
-        $this->nbChambres = $nbChambres;
+        $this->chambres = $chambres;
 
         return $this;
+    }
+
+    public function addChambres(Chambre $chambre)
+    {
+        $this->chambres[] = $chambre;
     }
 
     public function getReservations()
@@ -119,9 +123,10 @@ class Hotel
     {
         return "<h3>$this->nom " . $this->etoiles . " $this->ville</h3>
                     <p>$this->adresse " . $this->codePostal . " $this->ville</p>
-                    <p>Nombre de Chambres : $this->nbChambres</p>
+                    <p>Nombre de chambres : " . count($this->chambres) . "</p>
                     <p>Nombre de chambres reservées : </p>
                     <p>Nombre de chambres dispo : </p>";
     }
+
 
 }

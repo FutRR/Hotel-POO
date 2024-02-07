@@ -3,21 +3,22 @@
 class Chambre
 {
     private string $numero;
-    private int $prix;
+    private float $prix;
     private int $nbLits;
     private bool $wifi;
     private bool $etat;
+    private Hotel $hotel;
     private array $reservations;
 
-
-    public function __construct(string $numero, int $prix, int $nbLits, bool $wifi, bool $etat)
+    public function __construct(string $numero, float $prix, int $nbLits, bool $wifi, Hotel $hotel)
     {
         $this->numero = $numero;
         $this->prix = $prix;
         $this->nbLits = $nbLits;
         $this->wifi = $wifi;
-        $this->etat = $etat;
-        $this->resrvations = [];
+        $this->hotel = $hotel;
+        $this->hotel->addChambres($this);
+        $this->reservations = [];
     }
 
     public function getNumero(): string
@@ -32,12 +33,12 @@ class Chambre
         return $this;
     }
 
-    public function getPrix(): int
+    public function getPrix(): float
     {
         return $this->prix;
     }
 
-    public function setPrix(int $prix)
+    public function setPrix(float $prix)
     {
         $this->prix = $prix;
 
@@ -76,6 +77,18 @@ class Chambre
     public function setEtat(bool $etat)
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getHotel(): Hotel
+    {
+        return $this->hotel;
+    }
+
+    public function setHotel(Hotel $hotel)
+    {
+        $this->hotel = $hotel;
 
         return $this;
     }
