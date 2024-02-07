@@ -125,12 +125,22 @@ class Chambre
         return "$this->nbLits lits - $this->prix € - Wifi : $hasWifi";
     }
 
+    public function afficherIcon()
+    {
+        if ($this->getWifi()) {
+            $hasWifi = "<i class='fa-solid fa-wifi'></i>";
+        } else {
+            $hasWifi = "";
+        }
+        return $hasWifi;
+    }
+
     public function afficherEtat()
     {
         if ($this->etat === true) {
-            return "Réservé";
+            return "<p class='red'>Réservée</p>";
         } else {
-            return "Disponible";
+            return "<p class='green'>Disponible</p>";
         }
     }
 

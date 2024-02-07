@@ -77,12 +77,12 @@ class Client
     public function afficherReservations()
     {
         $result = "<h3>Réservations de $this</h3>
-                    <span class='res'>" . count($this->reservations) . " Réservations</span>";
+                    <span class='green'>" . count($this->reservations) . " Réservations</span>";
         if (empty($this->reservations)) {
             $result .= "<p>Aucune réservations !</p>";
         } else {
             foreach ($this->reservations as $reservation) {
-                $result .= "<p>Hotel : " . $reservation->getChambre()->getHotel() . " / " . $reservation->getChambre()->afficherNumero() . " (" . $reservation->getChambre()->getInfos() . ") " . $reservation->afficherDates() . "</p>";
+                $result .= "<p><span class='bold'>Hotel : " . $reservation->getChambre()->getHotel() . "</span> / " . $reservation->getChambre()->afficherNumero() . " (" . $reservation->getChambre()->getInfos() . ") " . $reservation->afficherDates() . "</p>";
             }
         }
         $result .= "Total : " . $this->calculerSejour() . " €";

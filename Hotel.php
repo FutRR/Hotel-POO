@@ -141,7 +141,7 @@ class Hotel
     public function afficherReservations()
     {
         $result = "<h3>Réservations de l'hôtel $this</h3>
-                    <span class='res'>" . count($this->reservations) . " Réservations</span>";
+                    <span class='green'>" . count($this->reservations) . " Réservations</span>";
         if (empty($this->reservations)) {
             $result .= "<p>Aucune réservations !</p>";
         } else {
@@ -159,23 +159,18 @@ class Hotel
         $result .= "<table>
                     <thead>
                         <tr>
-                            <th>CHAMBRE</th>
-                            <th>PRIX</th>
-                            <th>WIFI</th>
-                            <th>ETAT</th>
+                            <th id='chambre'>CHAMBRE</th>
+                            <th id='prix'>PRIX</th>
+                            <th id='wifi'>WIFI</th>
+                            <th id='etat'>ETAT</th>
                         </tr>
                     </thead>    
                     <tbody>";
         foreach ($this->chambres as $chambre) {
-            if ($chambre->getWifi() === true) {
-                $hasWifi = "<i class='fa-regular fa-wifi'></i>";
-            } else {
-                $hasWifi = "";
-            }
             $result .= "<tr>
                         <td>" . $chambre->afficherNumero() . "</td>
                         <td>" . $chambre->getPrix() . " €</td>
-                        <td>$hasWifi</td>
+                        <td>" . $chambre->afficherIcon() . "</td>
                         <td><span class ='res'>" . $chambre->afficherEtat() . "</span></td>";
         }
         $result .= "</tbody></table>";
