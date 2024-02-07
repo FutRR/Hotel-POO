@@ -140,10 +140,45 @@ class Hotel
 
     public function afficherReservations()
     {
-        $result = "<h3>Réservations de l'hôtel $this</h3>";
-        foreach ($this->reservations as $reservation) {
-            $result .= "<p>" . $reservation->getClient() . " - " . $reservation->getChambre() . " - du " . $reservation->getDateDebut() . " au " . $reservation->getDateFin() . "</p>";
+        $result = "<h3>Réservations de l'hôtel $this</h3>
+                    <span class='res'>" . count($this->reservations) . " Réservations</span>";
+        if (empty($this->reservations)) {
+            $result .= "<p>Aucune réservations !</p>";
+        } else {
+            foreach ($this->reservations as $reservation) {
+                $result .= "<p>" . $reservation->getClient() . " - " . $reservation->getChambre()->afficherNumero() . " - " . $reservation->afficherDates() . "</p>";
+            }
         }
+        return $result;
+    }
+
+    public function afficherStatut()
+    {
+
+        $result = "<h3><span class='statut'>Statuts des chambres de </span>$this</h3>";
+        $result .= "<table>
+                    <thead>
+                        <tr>
+                            <th>CHAMBRE</th>
+                            <th>PRIX</th>
+                            <th>WIFI</th>
+                            <th>ETAT</th>
+                        </tr>
+                    </thead>    
+                    <tbody>";
+        foreach ($this->chambres as $chambre) {
+            if ($chambre->getWifi() === true) {
+                $hasWifi = "<i class='fa-regular fa-wifi'></i>";
+            } else {
+                $hasWifi = "";
+            }
+            $result .= "<tr>
+                        <td>" . $chambre->afficherNumero() . "</td>
+                        <td>" . $chambre->getPrix() . " €</td>
+                        <td>$hasWifi</td>
+                        <td><span class ='res'>" . $chambre->afficherEtat() . "</span></td>";
+        }
+        $result .= "</tbody></table>";
         return $result;
     }
 
