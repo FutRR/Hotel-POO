@@ -57,7 +57,36 @@ class Client
 
     public function __toString()
     {
-        return "$this->nom $this->prenom";
+        return "$this->prenom $this->nom";
+    }
+
+    public function calculerSejour()
+    {
+        $total = 0;
+        foreach ($this->reservations as $reservation) {
+            $date1 = $reservation->getDateDebut();
+            $date2 = $reservation->getDateFin();
+            $interval = $date1->diff($date2);
+
+            $total += $interval->d * $reservation->getChambre()->getPrix();
+        }
+        return $total;
+    }
+
+
+    public function afficherReservations()
+    {
+        $result = "<h3>Réservations de $this</h3>
+                    <span class='res'>" . count($this->reservations) . " Réservations</span>";
+        if (empty($this->reservations)) {
+            $result .= "<p>Aucune réservations !</p>";
+        } else {
+            foreach ($this->reservations as $reservation) {
+                $result .= "<p>Hotel : " . $reservation->getChambre()->getHotel() . " / " . $reservation->getChambre()->afficherNumero() . " (" . $reservation->getChambre()->getInfos() . ") " . $reservation->afficherDates() . "</p>";
+            }
+        }
+        $result .= "Total : " . $this->calculerSejour() . " €";
+        return $result;
     }
 
 }

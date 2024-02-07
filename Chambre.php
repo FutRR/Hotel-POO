@@ -6,7 +6,7 @@ class Chambre
     private float $prix;
     private int $nbLits;
     private bool $wifi;
-    private bool $etat;
+    private bool $etat = false;
     private Hotel $hotel;
     private array $reservations;
 
@@ -108,6 +108,30 @@ class Chambre
     public function addReservations(Reservation $reservation)
     {
         $this->reservations[] = $reservation;
+    }
+
+    public function afficherNumero()
+    {
+        return "Chambre $this->numero";
+    }
+
+    public function getInfos()
+    {
+        if ($this->wifi) {
+            $hasWifi = "Oui";
+        } else {
+            $hasWifi = "Non";
+        }
+        return "$this->nbLits lits - $this->prix € - Wifi : $hasWifi";
+    }
+
+    public function afficherEtat()
+    {
+        if ($this->etat === true) {
+            return "Réservé";
+        } else {
+            return "Disponible";
+        }
     }
 
 }

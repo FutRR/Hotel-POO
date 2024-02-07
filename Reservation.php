@@ -14,10 +14,12 @@ class Reservation
         $this->chambre = $chambre;
         $this->chambre->addReservations($this);
         $this->chambre->getHotel()->addReservations($this);
+        $this->chambre->setEtat(true);
         $this->client = $client;
         $this->client->addReservations($this);
         $this->dateDebut = new DateTime($dateDebut);
         $this->dateFin = new DateTime($dateFin);
+
     }
 
     public function getChambre(): Chambre
@@ -65,5 +67,12 @@ class Reservation
         $this->dateFin = $dateFin;
 
         return $this;
+    }
+
+
+    public function afficherDates()
+    {
+        $date = "du " . $this->dateDebut->format("d-m-Y") . " au " . $this->dateFin->format("d-m-Y") . "";
+        return $date;
     }
 }
