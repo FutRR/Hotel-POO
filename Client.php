@@ -55,4 +55,9 @@ class Client
         $this->reservations[] = $reservation;
     }
 
+    public function __toString()
+    {
+        return "$this->nom $this->prenom";
+    }
+
 }

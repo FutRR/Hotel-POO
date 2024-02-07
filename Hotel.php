@@ -119,14 +119,32 @@ class Hotel
 
     // DISPLAY //
 
-    public function getInfos()
+    public function __toString()
     {
-        return "<h3>$this->nom " . $this->etoiles . " $this->ville</h3>
-                    <p>$this->adresse " . $this->codePostal . " $this->ville</p>
-                    <p>Nombre de chambres : " . count($this->chambres) . "</p>
-                    <p>Nombre de chambres reservées : </p>
-                    <p>Nombre de chambres dispo : </p>";
+        return "$this->nom " . $this->etoiles . " $this->ville";
     }
 
+    public function afficherAdresse()
+    {
+        return "$this->adresse " . $this->codePostal . " $this->ville";
+    }
+
+    public function getInfos()
+    {
+        return "<h3>$this</h3>
+                <p>" . $this->afficherAdresse() . "</p>
+                <p>Nombre de chambres : " . count($this->chambres) . "</p>
+                <p>Nombre de chambres réservées : " . count($this->reservations) . "</p>
+                <p>Nombre de chambres dispo : " . count($this->chambres) - count($this->reservations) . " </p>";
+    }
+
+    public function afficherReservations()
+    {
+        $result = "<h3>Réservations de l'hôtel $this</h3>";
+        foreach ($this->reservations as $reservation) {
+            $result .= "<p>" . $reservation->getClient() . " - " . $reservation->getChambre() . " - du " . $reservation->getDateDebut() . " au " . $reservation->getDateFin() . "</p>";
+        }
+        return $result;
+    }
 
 }

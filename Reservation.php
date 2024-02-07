@@ -13,6 +13,7 @@ class Reservation
     {
         $this->chambre = $chambre;
         $this->chambre->addReservations($this);
+        $this->chambre->getHotel()->addReservations($this);
         $this->client = $client;
         $this->client->addReservations($this);
         $this->dateDebut = new DateTime($dateDebut);
